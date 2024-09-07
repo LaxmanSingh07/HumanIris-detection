@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iris Recognizer - Home</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f4f8;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      header,
+      footer {
+        background-color: #0044cc;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      nav ul li {
+        display: inline;
+        margin: 0 1rem;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        width: 100%;
+        overflow: hidden;
+      }
+      section {
+        background-color: white;
+        padding: 2rem;
+        margin: 1rem 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: calc(100% - 4rem);
+        max-width: 1200px;
+        text-align: center;
+      }
+      h2 {
+        color: #0044cc;
+      }
+      .image-container {
+        border: 2px dashed #0044cc;
+        padding: 1rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Iris Recognizer</h1>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/predict">Predict</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section id="home">
+          <h2>Welcome to Iris Recognizer!</h2>
+          <p>
+            This web application allows you to recognize and analyze human iris
+            patterns for security and identification purposes.
+          </p>
+          <p>Explore our features and get started!</p>
+        </section>
+        <section id="about">
+          <h2>About Iris Recognizer</h2>
+          <p>
+            The Iris Recognizer application uses advanced algorithms to analyze
+            the unique patterns in human irises. It provides high accuracy in
+            identification and security applications.
+          </p>
+          <p>
+            Learn more about the technology and algorithms behind our
+            application.
+          </p>
+        </section>
+        <section id="predict">
+          <h2>Predict Iris Patterns</h2>
+          <p>
+            Use our prediction feature to upload an image of an iris to
+            determine its unique patterns and get identification results.
+          </p>
+          <div>
+            <p>Upload an image of an iris for analysis:</p>
+            <img
+              src="./laxSingh.jpg"
+              alt="Iris Image Placeholder"
+              width="300"
+              height="300"
+            />
+          </div>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; 2024 Laxman</p>
+      </footer>
+    </div>
+  </body>
+</html>

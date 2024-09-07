@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Iris Recognizer - Predict</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f4f8;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      header,
+      footer {
+        background-color: #0044cc;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      nav ul li {
+        display: inline;
+        margin: 0 1rem;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      section {
+        background-color: white;
+        padding: 2rem;
+        margin: 1rem 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 800px;
+        text-align: center;
+      }
+      h2 {
+        color: #0044cc;
+      }
+      .form-container {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      .form-container input[type="file"] {
+        display: block;
+        margin: 0 auto 1rem;
+      }
+      .form-container input[type="submit"] {
+        background-color: #0044cc;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+      .form-container input[type="submit"]:hover {
+        background-color: #003399;
+      }
+      .image-container {
+        border: 2px dashed #0044cc;
+        padding: 1rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+      #result {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Iris Recognizer</h1>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/predict">Predict</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section>
+          <h2>Predict Iris Patterns</h2>
+          <form
+            id="upload-form"
+            class="form-container"
+            enctype="multipart/form-data"
+          >
+            <input
+              type="file"
+              name="file"
+              id="file"
+              accept="image/*"
+              required
+            />
+            <input type="submit" value="Predict" />
+          </form>
+          <div class="image-container">
+            <p>Uploaded Image:</p>
+            <img id="uploaded-image" src="" alt="No image uploaded" />
+          </div>
+          <div id="result"></div>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; 2024 Your Company</p>
+      </footer>
+      <script>
+        document.getElementById("upload-form").onsubmit = async function (
+          event
+        ) {
+          event.preventDefault();
+          const formData = new FormData();
+          const fileField = document.querySelector('input[type="file"]');
+          formData.append("file", fileField.files[0]);
+
+          const response = await fetch("/predict", {
+            method: "POST",
+            body: formData,
+          });
+
+          const result = await response.json();
+          const resultDiv = document.getElementById("result");
+          if (result.error) {
+            resultDiv.innerHTML = `<p style="color: red;">${result.error}</p>`;
+          } else {
+            resultDiv.innerHTML = `<p style="color: green;">Prediction: ${result.label}</p>`;
+          }
+
+          // Display the uploaded image
+          const uploadedImage = document.getElementById("uploaded-image");
+          uploadedImage.src = URL.createObjectURL(fileField.files[0]);
+          uploadedImage.alt = "Uploaded iris image";
+        };
+      </script>
+    </div>
+  </body>
+</html>
